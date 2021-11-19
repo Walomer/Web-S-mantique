@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Web Sémantique</h1>
+  <form method="post" action="{{ url_for('research') }}">
+    <div class="mb-3">
+      <label for="value" class="form-label">Valeur recherchée</label>
+      <input type="text" class="form-control" id="value" name="data" />
+    </div>
+    <div class="mb-3">
+      <input type="radio" id="radioCompetence" name="choice" value="competence"/>
+      <label for="radioCompetence">Compétence</label>
+      <input type="radio" id="radioMetier" name="choice" value="metier" />
+      <label for="radioMetier">Métier</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <p>{{ mostSim }}</p>
+    <table class="table">
+      <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Libellé</th>
+      <th scope="col">Score</th>
+    </tr>
+  </thead>
+    <tbody>
+            {% for lib in data %}
+                <tr>
+            <td>{{ lib }}</td>
+                {% for info in data[lib] %}
+                     <td>{% for value in info %}
+                       {{ info[value] }}
+                     {% endfor %}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+    </tbody>
+
+    </table>
+
+</div>
+{% endblock %}
