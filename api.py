@@ -65,14 +65,19 @@ def search(word, choice):
 def cleanDict(dict):
     dico = {}
     for key in dict:
+        values = []
         tab = []
-        values = {}
         i = 0
+        score = "score"
+        noms = "libelle"
         for libelle in dict[key]:
-            values['score'+str(i)] = libelle['score']
-            values['libelle'+str(i)] = libelle['libelle']
-            tab.append(values)
+            if libelle[score]:
+                values.append(libelle['score'])
+                values.append(libelle['libelle'])
             i = i + 1
-        print(tab)
+        tab.append(values)
+        if not dict[key]:
+            tab = [[0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée"]]
+            tab.append(tab)
         dico[key] = tab
     return dico

@@ -24,19 +24,34 @@
     </tr>
   </thead>
     <tbody>
-            {% for lib in data %}
+            {% for key in data %}
                 <tr>
-            <td>{{ lib }}</td>
-                {% for info in data[lib] %}
-                     <td>{% for value in info %}
-                       {{ info[value] }}
-                     {% endfor %}</td>
-                {% endfor %}
+                    <td rowspan="5"> {{ key }}</td>
+                    {% for value in data[key] %}
+                            <td>{{ value[1] }} </td>
+                            <td>{{ value[0] }}</td>
+                            <tr>
+                            <td>{{ value[3] }} </td>
+                            <td>{{ value[2] }}</td>
+                            </tr>
+                            <tr>
+                            <td>{{ value[5] }} </td>
+                            <td>{{ value[4] }}</td>
+                            </tr>
+                            <tr>
+                            <td>{{ value[7] }} </td>
+                            <td>{{ value[6] }}</td>
+                            </tr>
+                            <tr>
+                            <td>{{ value[9] }} </td>
+                            <td>{{ value[8] }}</td>
+                            </tr>
+                    {% endfor %}
                 </tr>
             {% endfor %}
     </tbody>
-
     </table>
+
 
 </div>
 {% endblock %}
