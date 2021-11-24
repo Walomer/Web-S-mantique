@@ -69,7 +69,6 @@ def cleanDict(dict):
         tab = []
         i = 0
         score = "score"
-        noms = "libelle"
         for libelle in dict[key]:
             if libelle[score]:
                 values.append(libelle['score'])
@@ -77,7 +76,9 @@ def cleanDict(dict):
             i = i + 1
         tab.append(values)
         if not dict[key]:
-            tab = [[0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée"]]
-            tab.append(tab)
-        dico[key] = tab
+            tab1 = [[0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée",0, "Aucune Donnée"]]
+            dico[key]= tab1
+        else:
+            dico[key] = tab
+        print(dico)
     return dico

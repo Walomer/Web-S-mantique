@@ -1,9 +1,11 @@
+import os
 from flask import Flask, render_template, request
 import sys
 from api import *
 from word_similar import *
 
 app = Flask(__name__)
+app._static_folder = os.path.abspath("templates/static/")
 
 @app.route('/')
 def home():
@@ -12,16 +14,16 @@ def home():
 
 @app.route('/research', methods=['POST'])
 def research():
-    print(request.form)
     if request.form['data'] and request.form['choice']:
         data = request.form['data']
+        print(data)
         choice = request.form['choice']
         mostSim = most_similar(data)
         res = search(data, choice)
         print(res)
+        nlpTab = dictToNounsTab(res)
         res = cleanDict(res)
-        print(res)
-        return render_template('home.html', mostSim = mostSim, data=res)
+        return render_template('home.html', mostSim = mostSim, data=res, wordcloud=nlpTab)
     else:
         return render_template('home.html')        
 
