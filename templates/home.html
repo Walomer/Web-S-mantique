@@ -1,4 +1,12 @@
 {% extends 'base.html' %} {% block content %}
+            <style>
+    html, body, #container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    }
+  </style>
 <div class="container">
   <h1>Web Sémantique</h1>
   <form method="post" action="{{ url_for('research') }}">
@@ -52,7 +60,32 @@
     </tbody>
     </table>
 
-{{ wordcloud }}
-     <script src='static/scripts/wordcloud.js'></script>
+
+    <div id="container"></div>
+    <script>
+    anychart.onDocumentReady(function() {
+        // code to create a word cloud chart will be here
+         var data = uscape({{ wordcloud }});
+         data = data.replace(/["']/g, "")
+        console.log(data)
+
+
+     // create a tag (word) cloud chart
+      var chart = anychart.tagCloud(data);
+
+       // set a chart title
+      chart.title('15 most spoken languages')
+      // set an array of angles at which the words will be laid out
+      chart.angles([0])
+      // enable a color range
+      chart.colorRange(true);
+      // set the color range length
+      chart.colorRange().length('80%');
+
+      // display the word cloud chart
+      chart.container("container");
+      chart.draw();
+    });
+    </script>
 </div>
 {% endblock %}

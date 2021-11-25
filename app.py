@@ -22,6 +22,7 @@ def research():
         res = search(data, choice)
         print(res)
         nlpTab = dictToNounsTab(res)
+        nlpTab = nounTabToDict(nlpTab)
         res = cleanDict(res)
         return render_template('home.html', mostSim = mostSim, data=res, wordcloud=nlpTab)
     else:

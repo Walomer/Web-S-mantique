@@ -82,3 +82,19 @@ def cleanDict(dict):
             dico[key] = tab
         print(dico)
     return dico
+
+def nounTabToDict(dico):
+    dict = {}
+    tab = []
+    for item in dico:
+        temp = item
+        doc = nlp(item)
+        token = doc[0]
+        i = 0
+        for items in dico :
+            if temp == items :
+                i = i + 1
+        strtoaddtab = "{\"x\": " + item + ", \"value\":" + str(i) + ", category: " + token.pos_ + "}"
+        tab.append(strtoaddtab)
+
+    return tab
