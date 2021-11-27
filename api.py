@@ -84,7 +84,6 @@ def cleanDict(dict):
     return dico
 
 def nounTabToDict(dico):
-    dict = {}
     tab = []
     for item in dico:
         temp = item
@@ -94,7 +93,8 @@ def nounTabToDict(dico):
         for items in dico :
             if temp == items :
                 i = i + 1
-        strtoaddtab = "{\"x\": " + item + ", \"value\":" + str(i) + ", category: " + token.pos_ + "}"
-        tab.append(strtoaddtab)
+        dicttoaddtab = {'x':   item, 'value':  str(i), 'category': token.pos_}
+        if (not dicttoaddtab in tab):
+            tab.append(dicttoaddtab)
 
     return tab

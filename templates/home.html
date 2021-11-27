@@ -1,12 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-            <style>
-    html, body, #container {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    }
-  </style>
+
 <div class="container">
   <h1>Web Sémantique</h1>
   <form method="post" action="{{ url_for('research') }}">
@@ -22,7 +15,13 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  <p>{{ mostSim }}</p>
+
+    {% if data %}
+    <h3>Voici une liste des mots similaires a votre recherche</h3>
+    <ul class="list-group">
+    {% for i in mostSim%}
+        <li class="list-group-item">{{i}}</li>
+    {% endfor %}
     <table class="table">
       <thead>
     <tr>
@@ -34,8 +33,14 @@
     <tbody>
             {% for key in data %}
                 <tr>
-                    <td rowspan="5"> {{ key }}</td>
                     {% for value in data[key] %}
+                        {% if value[0] == 0 %}
+                            <td> {{ key }}</td>
+                            <td>{{ value[1] }} </td>
+                            <td>{{ value[0] }}</td>
+                            </tr>
+                        {% else %}
+                            <td rowspan="5"> {{ key }}</td>
                             <td>{{ value[1] }} </td>
                             <td>{{ value[0] }}</td>
                             <tr>
@@ -54,20 +59,22 @@
                             <td>{{ value[9] }} </td>
                             <td>{{ value[8] }}</td>
                             </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% for value in data[key] %}
+
             </tr>
             {% endfor %}
             {% endfor %}
     </tbody>
     </table>
-
-
-    <script type="module" src="/static/scripts/wordcloud.js"></script>
-
-    <p>{{ wordcloud }}</p>
-    <div id="container">
-            <button onclick='wordcloud("[banane, cacao, caca, chocolat]")'> </button>
-
-    </div>
+    <button type="button" class="btn btn-outline-primary" onclick='wordcloud({{ wordcloud }})'> Le nuage de mots </button>
 
 </div>
+    <script type="text/javascript" src="/static/scripts/wordcloud.js"></script>
+
+    <div id="containerr" style="width: 100%; height: 500px; margin: 0;padding: 0">
+    </div>
+
+{% endif %}
 {% endblock %}
