@@ -7,11 +7,23 @@
       <label for="value" class="form-label">Valeur recherchée</label>
       <input type="text" class="form-control" id="value" name="data" />
     </div>
+<!--      <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="Compétence">
+      <label class="form-check-label" for="Compétence">
+        Compétence
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="radioMetier" checked>
+      <label class="form-check-label" for="radioMetier">
+        Default checked radio
+      </label>
+    </div>-->
     <div class="mb-3">
-      <input type="radio" id="radioCompetence" name="choice" value="competence"/>
-      <label for="radioCompetence">Compétence</label>
-      <input type="radio" id="radioMetier" name="choice" value="metier" />
-      <label for="radioMetier">Métier</label>
+      <input class="form-check-input" type="radio" id="radioCompetence" name="choice" value="competence" checked/>
+      <label class="form-check-label" for="radioCompetence">Compétence</label>
+      <input class="form-check-input" type="radio" id="radioMetier" name="choice" value="metier" />
+      <label class="form-check-label" for="radioMetier">Métier</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -22,7 +34,8 @@
     {% for i in mostSim%}
         <li class="list-group-item">{{i}}</li>
     {% endfor %}
-    <table class="table">
+        <br>
+    <table class="table table-bordered">
       <thead>
     <tr>
       <th scope="col">Nom</th>
@@ -35,14 +48,14 @@
                 <tr>
                     {% for value in data[key] %}
                         {% if value[0] == 0 %}
-                            <td> {{ key }}</td>
-                            <td>{{ value[1] }} </td>
-                            <td>{{ value[0] }}</td>
+                            <th scope="row" > {{ key }}</th>
+                            <td class="table-danger">{{ value[1] }} </td>
+                            <td class="table-danger">{{ value[0] }}</td>
                             </tr>
                         {% else %}
-                            <td rowspan="5"> {{ key }}</td>
-                            <td>{{ value[1] }} </td>
-                            <td>{{ value[0] }}</td>
+                            <th scope="row" rowspan="5"> {{ key }}</th>
+                            <td class="table-success">{{ value[1] }} </td>
+                            <td class="table-success">{{ value[0] }}</td>
                             <tr>
                             <td>{{ value[3] }} </td>
                             <td>{{ value[2] }}</td>
